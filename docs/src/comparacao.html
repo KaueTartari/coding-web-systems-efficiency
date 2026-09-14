@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Comparação coding-web-systems-efficiency</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1600px; background: #161513; color: #F2EDE4; font-family: "Space Grotesk", Arial, sans-serif; padding: 64px; overflow: hidden; }
+  h1 { font-size: 64px; line-height: 1; letter-spacing: -0.04em; margin-bottom: 16px; }
+  h1 span { color: #FF4F1A; }
+  .sub { font-size: 22px; color: #9c968c; margin-bottom: 56px; }
+  .case { border-top: 1.5px solid #3a3733; padding: 32px 0; display: grid; grid-template-columns: 320px 1fr; gap: 40px; }
+  .case h2 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.1; }
+  .case h2 small { display: block; font-size: 17px; color: #9c968c; font-weight: 500; letter-spacing: 0; margin-top: 8px; }
+  .row { display: grid; grid-template-columns: 150px 1fr 190px; gap: 20px; align-items: center; margin-bottom: 14px; }
+  .row:last-child { margin-bottom: 0; }
+  .tag { font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .06em; display: flex; gap: 8px; align-items: center; }
+  .tag i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .off .tag i { background: #6b6760; } .on .tag i { background: #FF4F1A; }
+  .bar { height: 40px; position: relative; }
+  .bar b { position: absolute; left: 0; top: 0; bottom: 0; }
+  .off .bar b { background: #6b6760; }
+  .on .bar b { background: #FF4F1A; min-width: 6px; }
+  .bar code { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-family: "JetBrains Mono", monospace; font-size: 15px; color: #161513; white-space: nowrap; }
+  .on .bar code { left: 22px; color: #F2EDE4; }
+  .n { font-family: "JetBrains Mono", monospace; font-size: 22px; text-align: right; }
+  .on .n { color: #FF4F1A; }
+  footer { font-family: "JetBrains Mono", monospace; font-size: 14px; color: #9c968c; margin-top: 24px; border-top: 1.5px solid #3a3733; padding-top: 24px; }
+</style>
+</head>
+<body>
+  <h1>Mesma resposta. <span>Até 5.000× menos contexto.</span></h1>
+  <p class="sub">Tokens que cada abordagem coloca na conversa, medidos com dados de exemplo.</p>
+
+  <div class="case">
+    <h2>Banco de dados<small>tabela com 5.000 pedidos</small></h2>
+    <div>
+      <div class="row off"><p class="tag"><i></i>SEM A SKILL</p><div class="bar"><b style="width:100%"></b><code>SELECT * FROM pedidos</code></div><p class="n">≈ 210.700</p></div>
+      <div class="row on"><p class="tag"><i></i>COM A SKILL</p><div class="bar"><b style="width:0.04%"></b><code>SELECT id, status … WHERE status='erro' LIMIT 10</code></div><p class="n">≈ 75</p></div>
+    </div>
+  </div>
+
+  <div class="case">
+    <h2>Log do servidor<small>20.000 linhas</small></h2>
+    <div>
+      <div class="row off"><p class="tag"><i></i>SEM A SKILL</p><div class="bar"><b style="width:100%"></b><code>cat app.log</code></div><p class="n">≈ 275.600</p></div>
+      <div class="row on"><p class="tag"><i></i>COM A SKILL</p><div class="bar"><b style="width:0.15%"></b><code>grep ERROR app.log | tail -20  +  contagem agrupada</code></div><p class="n">≈ 420</p></div>
+    </div>
+  </div>
+
+  <div class="case">
+    <h2>Planilha CSV<small>30.000 vendas, total por loja</small></h2>
+    <div>
+      <div class="row off"><p class="tag"><i></i>SEM A SKILL</p><div class="bar"><b style="width:100%"></b><code>abrir vendas.csv inteiro</code></div><p class="n">≈ 283.900</p></div>
+      <div class="row on"><p class="tag"><i></i>COM A SKILL</p><div class="bar"><b style="width:0.02%"></b><code>script que soma por loja e imprime só o resultado</code></div><p class="n">≈ 55</p></div>
+    </div>
+  </div>
+
+  <footer>github.com/KaueTartari/coding-web-systems-efficiency · dados fictícios gerados para o teste · tokens estimados em 4 caracteres por token</footer>
+</body>
+</html>
