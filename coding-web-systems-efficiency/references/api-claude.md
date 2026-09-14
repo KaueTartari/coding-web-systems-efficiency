@@ -19,7 +19,7 @@ Nomes de parâmetros, modelos, preços e versões de recursos mudam. Antes de es
 ## 1. Escolha de modelo e esforço
 - **Modelo por tarefa, não um para tudo:** classificação, extração de campos, resumo curto e roteamento funcionam bem com o modelo menor e mais barato (família Haiku). Reserve os modelos maiores para raciocínio complexo, código ou textos longos de qualidade.
 - **Roteamento:** um modelo pequeno decide o tipo de pedido e só encaminha para o modelo maior quando necessário.
-- **Esforço (`effort`):** baixo/médio para respostas rotineiras; alto só onde a qualidade do raciocínio muda o resultado. Raciocínio estendido gera tokens de saída pagos.
+- **Esforço (`effort`, em `output_config`):** `low`/`medium` para respostas rotineiras; `high`/`max` só onde a qualidade do raciocínio muda o resultado. Raciocínio estendido gera tokens de saída pagos.
 - **Não troque de modelo no meio de uma conversa** que usa cache: o cache é por modelo e é perdido.
 
 ## 2. Prompt caching
@@ -38,8 +38,8 @@ Leitura de cache custa uma fração do input normal (desconto de até ~90%); gra
 - **Streaming** melhora a percepção de velocidade, mas não reduz custo.
 
 ## 4. Histórico de conversa (chatbots)
-- **Não reenvie o histórico inteiro para sempre.** Opções: janela das últimas N trocas; resumo das mensagens antigas guardado e enviado no lugar delas; ou compactação automática de contexto oferecida pela API.
-- **Resultados antigos de ferramentas** (buscas, consultas, páginas lidas) são os maiores vilões do histórico; use a limpeza automática de resultados de ferramentas da API ou remova-os você mesmo depois de usados.
+- **Não reenvie o histórico inteiro para sempre.** Opções: janela das últimas N trocas; resumo das mensagens antigas guardado e enviado no lugar delas; ou compactação automática de contexto oferecida pela API (estratégia de compaction, na época desta skill com nome versionado como `compact_20260112`).
+- **Resultados antigos de ferramentas** (buscas, consultas, páginas lidas) são os maiores vilões do histórico; use a edição de contexto da API com a estratégia de limpeza de resultados de ferramentas (`clear_tool_uses`, também com nome versionado) ou remova-os você mesmo depois de usados. Confira os nomes exatos na documentação atual, pois as versões mudam.
 - **Guarde fatos do usuário em banco** (nome, plano, preferências) e injete só o que for relevante, em vez de manter tudo no histórico.
 - **Base de conhecimento:** busque os trechos relevantes (RAG) e envie só eles, em vez de colar documentos inteiros em toda chamada. Se o documento for pequeno e fixo, cacheie.
 

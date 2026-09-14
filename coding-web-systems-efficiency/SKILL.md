@@ -74,8 +74,8 @@ Quando o projeto chama a API do Claude (chatbot, gerador de texto, classificador
 
 ## 10. Higiene da sessão (dicas para o usuário)
 Estas ações são do usuário. Mencione em uma linha quando fizer sentido — ao concluir uma funcionalidade ou quando a sessão estiver longa — sem repetir a cada resposta:
-- Começar uma sessão nova (ou `/clear` no terminal) a cada bug ou funcionalidade concluída.
+- Começar uma sessão nova (ou `/clear` no terminal) a cada bug ou funcionalidade concluída. Cada mensagem reenvia todo o histórico, então o custo total cresce muito mais rápido que o tamanho da conversa (de forma quadrática).
 - Editar a mensagem com erro em vez de mandar outra corrigindo.
 - Desligar conectores e plugins que o projeto não usa (e-mail, agenda, Slack etc.).
-- Esforço/modelo mais leve para ajustes simples e mais forte para arquitetura ou bug difícil, sem trocar no meio da mesma sessão.
+- Calibrar o esforço (effort) pela complexidade: `low`/`medium` para código rotineiro (trocar texto, cor ou espaçamento, função simples, tela de frontend, teste unitário); `high`/`max` só para arquitetura, bug profundo que envolve vários arquivos ou refatoração estrutural. Definir no início e não trocar esforço nem modelo no meio da sessão, porque isso invalida o cache.
 - Manter um `CLAUDE.md` curto no projeto (stack, pastas, comandos de build/teste, como acessar o banco e os logs, padrões) para evitar exploração repetida a cada sessão.
